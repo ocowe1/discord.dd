@@ -7,8 +7,8 @@ client.db = require("quick.db");
 client.commands = new Discord.Collection();
 client.cooldown = new Discord.Collection();
 client.config = {
-    TOKEN: "NzcxMTA4OTI1NDE1NjIwNjY4.X5nVJg.ZLA-pld7PtmoNJaVfvWfVOac24o", //Discord Bot Token
-    API_TOKEN: "MzIxMzMyMjQ5MTkyNjkzNzYy.MTYyMDIyNTg5NzcxNQ==.61f7a8d1a65e9a0e36746845f7f37571", //API Token found at http://api.snowflakedev.cf:9019/dashboard
+    TOKEN: process.env.TOKEN, //Discord Bot Token
+    API_TOKEN: process.env.API_TOKEN,
     prefix: ";",
     cooldown: 15000
 };
