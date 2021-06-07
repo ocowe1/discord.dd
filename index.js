@@ -1,19 +1,17 @@
 const Discord = require("discord.js");
 const client = new Discord.Client();
 const fs = require("fs");
-const Snowflake = require("snowflake-api");
+//const Snowflake = require("snowflake-api");
 
 client.db = require("quick.db");
 client.commands = new Discord.Collection();
 client.cooldown = new Discord.Collection();
 client.config = {
-    TOKEN: process.env.TOKEN, //Discord Bot Token
-    API_TOKEN: process.env.API_TOKEN,
     prefix: ";",
     cooldown: 15000
 };
-const api = new Snowflake.Client(client.config.API_TOKEN);
-client.snowapi = api;
+//const api = new Snowflake.Client(process.env.API_TOKEN);
+//client.snowapi = api;
 
 // Load Commands
 fs.readdir("./commands/", (err, files) => {
@@ -49,17 +47,5 @@ client.on("message", async (message) => {
     commandFile.run(client, message, args, api);
 });
 
-function xp(message) {
-    if (!client.cooldown.has(`${message.author.id}`) || !(Date.now() - client.cooldown.get(`${message.author.id}`) > client.config.cooldown)) {
-        let xp = client.db.add(`xp_${message.author.id}`, 1);
-        let level = Math.floor(0.3 * Math.sqrt(xp));
-        let lvl = client.db.get(`level_${message.author.id}`) || client.db.set(`level_${message.author.id}`,1);;
-        if (level > lvl) {
-            let newLevel = client.db.set(`level_${message.author.id}`,level);
-            message.channel.send(`:tada: ${message.author.toString()}, Você avançou para o nível ${newLevel}!`);
-        }
-        client.cooldown.set(`${message.author.id}`, Date.now());
-    }
-}
 
-client.login(client.config.TOKEN);
+client.login(process.env.TOKEN);
