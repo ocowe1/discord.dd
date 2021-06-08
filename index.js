@@ -1,7 +1,7 @@
 const Discord = require("discord.js");
 const client = new Discord.Client();
 const fs = require("fs");
-//const Snowflake = require("snowflake-api");
+const Snowflake = require("snowflake-api");
 
 client.db = require("quick.db");
 client.commands = new Discord.Collection();
@@ -10,8 +10,8 @@ client.config = {
     prefix: ";",
     cooldown: 15000
 };
-//const api = new Snowflake.Client(process.env.API_TOKEN);
-//client.snowapi = api;
+const api = new Snowflake.Client(process.env.API_TOKEN);
+client.snowapi = api;
 
 // Load Commands
 fs.readdir("./commands/", (err, files) => {

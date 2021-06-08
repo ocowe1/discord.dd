@@ -3,7 +3,7 @@ const { Client } = require('discord.js')
 const client = new Client({ partials: ['MESSAGE', 'CHANNEL', 'REACTION'] })
 
 
-module.exports.run = (client, message, user, args) => {
+module.exports = (client, message, user, args) => {
 
     const getEmoji = (emojiName) =>
         client.emoji.cache.find((emoji) => emoji.name === emojiName)
